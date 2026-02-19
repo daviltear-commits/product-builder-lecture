@@ -61,33 +61,43 @@ h1 {
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.lotto-numbers {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
+.meal-result {
     margin: 30px 0;
-}
-
-.number {
-    width: 60px;
-    height: 60px;
-    background-color: var(--number-bg);
-    color: var(--number-text);
-    border-radius: 50%;
+    min-height: 100px;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.8em;
+    transition: opacity 0.3s ease;
+}
+
+.meal-result.fade-out {
+    opacity: 0;
+}
+
+.meal-display {
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.category {
+    font-size: 1em;
+    color: var(--btn-bg);
     font-weight: bold;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
-    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+    display: block;
+    margin-bottom: 5px;
 }
 
-.number:hover {
-    transform: scale(1.1);
+.meal-name {
+    font-size: 2.2em;
+    margin: 0;
+    color: var(--text-color);
 }
 
-#generator-btn {
+#recommend-btn {
     background-color: var(--btn-bg);
     color: white;
     border: none;
@@ -97,9 +107,10 @@ h1 {
     cursor: pointer;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
     box-shadow: 0 5px 15px rgba(255, 64, 129, 0.4);
+    margin-bottom: 20px;
 }
 
-#generator-btn:hover {
+#recommend-btn:hover {
     background-color: var(--btn-hover);
     box-shadow: 0 8px 25px rgba(255, 64, 129, 0.6);
 }
