@@ -25,11 +25,13 @@ body {
         Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
+    align-items: flex-start;
+    min-height: 100vh;
     margin: 0;
     color: var(--text-color);
     transition: background 0.3s ease, color 0.3s ease;
+    padding: 40px 20px;
+    box-sizing: border-box;
 }
 
 .container {
@@ -40,6 +42,8 @@ body {
     text-align: center;
     backdrop-filter: blur(10px);
     position: relative;
+    width: 100%;
+    max-width: 600px;
 }
 
 .theme-toggle {
