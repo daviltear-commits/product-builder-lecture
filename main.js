@@ -9,7 +9,7 @@ function openTab(tabName) {
         tabBtns[i].classList.remove("active");
     }
     document.getElementById(tabName).classList.add("active");
-    event.currentTarget.classList.add("active");
+    if (event) event.currentTarget.classList.add("active");
 }
 
 // 메뉴 추천 로직
@@ -54,9 +54,32 @@ if (recommendBtn) {
     });
 }
 
-// 동물상 테스트 (Teachable Machine) 공용 변수 및 함수
+// 동물상 테스트 (Teachable Machine) 공용 변수 및 데이터
 const TM_URL = "https://teachablemachine.withgoogle.com/models/rE0jxOhAX/";
 let model, webcam, labelContainer, maxPredictions;
+
+const animalData = {
+    "Class 1": {
+        name: "강아지상",
+        emoji: "🐶",
+        description: "다정다감하고 사교적인 성격! 주변 사람들에게 에너지를 주는 타입입니다. 웃는 모습이 매력적이며 누구와도 쉽게 친해지는 친화력을 가지고 있습니다."
+    },
+    "Class 2": {
+        name: "고양이상",
+        emoji: "🐱",
+        description: "도도하지만 내 사람에게는 따뜻한 반전 매력! 혼자만의 시간도 소중히 여기며, 섬세하고 지적인 분위기를 풍기는 타입입니다."
+    },
+    "dog": {
+        name: "강아지상",
+        emoji: "🐶",
+        description: "다정다감하고 사교적인 성격! 주변 사람들에게 에너지를 주는 타입입니다. 웃는 모습이 매력적이며 누구와도 쉽게 친해지는 친화력을 가지고 있습니다."
+    },
+    "cat": {
+        name: "고양이상",
+        emoji: "🐱",
+        description: "도도하지만 내 사람에게는 따뜻한 반전 매력! 혼자만의 시간도 소중히 여기며, 섬세하고 지적인 분위기를 풍기는 타입입니다."
+    }
+};
 
 async function loadModel() {
     if (!model) {
@@ -68,15 +91,29 @@ async function loadModel() {
 }
 
 function getPredictionHTML(prediction) {
-    let html = "";
+    // 확률이 가장 높은 순으로 정렬
+    prediction.sort((a, b) => b.probability - a.probability);
+    
+    const topResult = prediction[0];
+    const topData = animalData[topResult.className] || { name: topResult.className, emoji: "❓", description: "" };
+    
+    let html = `
+        <div class="top-prediction">
+            <div class="top-emoji">${topData.emoji}</div>
+            <div class="top-name">${topData.name}</div>
+            <div class="top-prob">${(topResult.probability * 100).toFixed(0)}%</div>
+            <div class="top-description">${topData.description}</div>
+        </div>
+        <div class="prediction-list">
+    `;
+
     for (let i = 0; i < maxPredictions; i++) {
         const prob = (prediction[i].probability * 100).toFixed(0);
-        const className = prediction[i].className === "dog" ? "강아지상" : 
-                          prediction[i].className === "cat" ? "고양이상" : prediction[i].className;
+        const data = animalData[prediction[i].className] || { name: prediction[i].className };
         
         html += `
             <div class="prediction-bar-container">
-                <span class="class-label">${className}</span>
+                <span class="class-label">${data.name}</span>
                 <div class="bar-outer">
                     <div class="bar-inner" style="width: ${prob}%"></div>
                 </div>
@@ -84,6 +121,7 @@ function getPredictionHTML(prediction) {
             </div>
         `;
     }
+    html += "</div>";
     return html;
 }
 
@@ -102,9 +140,6 @@ async function initTM() {
 
     document.getElementById("webcam-container").appendChild(webcam.canvas);
     labelContainer = document.getElementById("label-container");
-    for (let i = 0; i < maxPredictions; i++) {
-        labelContainer.appendChild(document.createElement("div"));
-    }
 }
 
 async function loopTM() {

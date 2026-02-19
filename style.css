@@ -153,17 +153,58 @@ h1 {
     object-fit: cover;
 }
 
-#label-container {
+
+/* 동물상 테스트 결과 스타일 */
+.top-prediction {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    animation: fadeIn 0.5s ease;
+}
+
+.top-emoji {
+    font-size: 4em;
+    margin-bottom: 10px;
+}
+
+.top-name {
+    font-size: 2em;
+    font-weight: bold;
+    color: var(--btn-bg);
+}
+
+.top-prob {
+    font-size: 1.2em;
+    color: #888;
+    margin-bottom: 15px;
+}
+
+.top-description {
+    font-size: 1em;
+    line-height: 1.6;
+    color: #555;
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: left;
+}
+
+.prediction-list {
     margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    padding: 10px;
+}
+
+#label-container, #upload-label-container {
+    margin-top: 20px;
 }
 
 .prediction-bar-container {
     display: flex;
     align-items: center;
     gap: 10px;
+    margin-bottom: 8px;
 }
 
 .class-label {
