@@ -104,3 +104,64 @@ h1 {
     box-shadow: 0 8px 25px rgba(255, 64, 129, 0.6);
 }
 
+.contact-section {
+    margin-top: 40px;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    margin: 20px 0;
+}
+
+body.light-mode hr {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+h3 {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+}
+
+#contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+#contact-form input,
+#contact-form textarea {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-color);
+}
+
+body.light-mode #contact-form input,
+body.light-mode #contact-form textarea {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background: white;
+}
+
+#contact-form textarea {
+    height: 80px;
+    resize: none;
+}
+
+#contact-form button {
+    background-color: var(--btn-bg);
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#contact-form button:hover {
+    background-color: var(--btn-hover);
+}
+
