@@ -4,6 +4,7 @@
     --text-color: #333;
     --btn-bg: #6a11cb;
     --btn-hover: #2575fc;
+    --accent-color: #ff4081;
 }
 
 body {
@@ -33,11 +34,47 @@ body {
     border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
+/* 탭 스타일 */
+.tabs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+    padding-bottom: 10px;
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.1em;
+    cursor: pointer;
+    color: #888;
+    transition: color 0.3s ease, font-weight 0.3s ease;
+}
+
+.tab-btn.active {
+    color: var(--btn-bg);
+    font-weight: bold;
+    border-bottom: 3px solid var(--btn-bg);
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
+
 h1 {
-    font-size: 3em;
+    font-size: 2.5em;
     margin-bottom: 20px;
 }
 
+/* 메뉴 추천 스타일 */
 .meal-result {
     margin: 30px 0;
     min-height: 100px;
@@ -74,12 +111,12 @@ h1 {
     color: #000;
 }
 
-#recommend-btn {
+#recommend-btn, .action-btn {
     background-color: var(--btn-bg);
     color: white;
     border: none;
     padding: 15px 30px;
-    font-size: 1.2em;
+    font-size: 1.1em;
     border-radius: 50px;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
@@ -87,11 +124,65 @@ h1 {
     margin-bottom: 20px;
 }
 
-#recommend-btn:hover {
+#recommend-btn:hover, .action-btn:hover {
     background-color: var(--btn-hover);
     transform: translateY(-2px);
 }
 
+/* 동물상 테스트 스타일 */
+.animal-container {
+    margin: 20px 0;
+}
+
+#webcam-container {
+    margin: 20px auto;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 200px;
+    height: 200px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+#label-container {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.prediction-bar-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.class-label {
+    width: 80px;
+    text-align: right;
+    font-weight: bold;
+}
+
+.bar-outer {
+    flex-grow: 1;
+    height: 20px;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.bar-inner {
+    height: 100%;
+    background: var(--btn-bg);
+    transition: width 0.3s ease;
+}
+
+.prob-label {
+    width: 40px;
+    font-size: 0.9em;
+    color: #666;
+}
+
+/* 공통 섹션 */
 .contact-section {
     margin-top: 40px;
 }
