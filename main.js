@@ -54,19 +54,45 @@ if (recommendBtn) {
     });
 }
 
-// 동물상 테스트 (Teachable Machine) 로직
+// 동물상 테스트 (Teachable Machine) 공용 변수 및 함수
 const TM_URL = "https://teachablemachine.withgoogle.com/models/rE0jxOhAX/";
 let model, webcam, labelContainer, maxPredictions;
 
+async function loadModel() {
+    if (!model) {
+        const modelURL = TM_URL + "model.json";
+        const metadataURL = TM_URL + "metadata.json";
+        model = await tmImage.load(modelURL, metadataURL);
+        maxPredictions = model.getTotalClasses();
+    }
+}
+
+function getPredictionHTML(prediction) {
+    let html = "";
+    for (let i = 0; i < maxPredictions; i++) {
+        const prob = (prediction[i].probability * 100).toFixed(0);
+        const className = prediction[i].className === "dog" ? "강아지상" : 
+                          prediction[i].className === "cat" ? "고양이상" : prediction[i].className;
+        
+        html += `
+            <div class="prediction-bar-container">
+                <span class="class-label">${className}</span>
+                <div class="bar-outer">
+                    <div class="bar-inner" style="width: ${prob}%"></div>
+                </div>
+                <span class="prob-label">${prob}%</span>
+            </div>
+        `;
+    }
+    return html;
+}
+
+// 실시간 테스트 로직
 async function initTM() {
     const startBtn = document.getElementById("start-webcam");
     startBtn.style.display = "none";
 
-    const modelURL = TM_URL + "model.json";
-    const metadataURL = TM_URL + "metadata.json";
-
-    model = await tmImage.load(modelURL, metadataURL);
-    maxPredictions = model.getTotalClasses();
+    await loadModel();
 
     const flip = true;
     webcam = new tmImage.Webcam(200, 200, flip);
@@ -89,21 +115,35 @@ async function loopTM() {
 
 async function predictTM() {
     const prediction = await model.predict(webcam.canvas);
-    for (let i = 0; i < maxPredictions; i++) {
-        const prob = (prediction[i].probability * 100).toFixed(0);
-        const className = prediction[i].className === "dog" ? "강아지상" : 
-                          prediction[i].className === "cat" ? "고양이상" : prediction[i].className;
-        
-        labelContainer.childNodes[i].innerHTML = `
-            <div class="prediction-bar-container">
-                <span class="class-label">${className}</span>
-                <div class="bar-outer">
-                    <div class="bar-inner" style="width: ${prob}%"></div>
-                </div>
-                <span class="prob-label">${prob}%</span>
-            </div>
-        `;
-    }
+    labelContainer.innerHTML = getPredictionHTML(prediction);
+}
+
+// 업로드 테스트 로직
+const fileInput = document.getElementById("file-input");
+const uploadBtn = document.getElementById("upload-btn");
+const imagePreview = document.getElementById("image-preview");
+const uploadLabelContainer = document.getElementById("upload-label-container");
+
+if (uploadBtn) {
+    uploadBtn.addEventListener("click", () => fileInput.click());
+}
+
+if (fileInput) {
+    fileInput.addEventListener("change", async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = async (event) => {
+            imagePreview.src = event.target.result;
+            imagePreview.style.display = "block";
+            
+            await loadModel();
+            const prediction = await model.predict(imagePreview);
+            uploadLabelContainer.innerHTML = getPredictionHTML(prediction);
+        };
+        reader.readAsDataURL(file);
+    });
 }
 
 const startTMBtn = document.getElementById("start-webcam");

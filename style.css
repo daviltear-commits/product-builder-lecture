@@ -130,17 +130,27 @@ h1 {
 }
 
 /* 동물상 테스트 스타일 */
-.animal-container {
+.animal-container, .upload-container {
     margin: 20px 0;
 }
 
-#webcam-container {
+#webcam-container, #image-preview-container {
     margin: 20px auto;
     border-radius: 10px;
     overflow: hidden;
     width: 200px;
     height: 200px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    background: #eee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#image-preview {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
 }
 
 #label-container {

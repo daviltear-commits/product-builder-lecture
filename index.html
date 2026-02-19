@@ -12,7 +12,8 @@
     <div class="container">
         <nav class="tabs">
             <button class="tab-btn active" onclick="openTab('menu-tab')">메뉴 추천</button>
-            <button class="tab-btn" onclick="openTab('animal-tab')">동물상 테스트</button>
+            <button class="tab-btn" onclick="openTab('animal-tab')">동물상 테스트(실시간)</button>
+            <button class="tab-btn" onclick="openTab('upload-tab')">동물상 테스트(업로드)</button>
         </nav>
 
         <!-- 메뉴 추천 탭 -->
@@ -26,12 +27,26 @@
 
         <!-- 동물상 테스트 탭 -->
         <div id="animal-tab" class="tab-content">
-            <h1>동물상 테스트 (강아지/고양이)</h1>
+            <h1>동물상 테스트 (실시간)</h1>
             <div class="animal-container">
                 <p>카메라를 허용하고 자신의 얼굴을 비춰보세요!</p>
                 <button type="button" class="action-btn" id="start-webcam">테스트 시작하기</button>
                 <div id="webcam-container"></div>
                 <div id="label-container"></div>
+            </div>
+        </div>
+
+        <!-- 파일 업로드 테스트 탭 -->
+        <div id="upload-tab" class="tab-content">
+            <h1>동물상 테스트 (업로드)</h1>
+            <div class="upload-container">
+                <p>사진 파일을 업로드하여 동물상을 확인하세요!</p>
+                <input type="file" id="file-input" accept="image/*" style="display: none;">
+                <button type="button" class="action-btn" id="upload-btn">사진 업로드하기</button>
+                <div id="image-preview-container">
+                    <img id="image-preview" src="#" alt="Preview" style="display: none;">
+                </div>
+                <div id="upload-label-container"></div>
             </div>
         </div>
         
