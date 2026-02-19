@@ -158,7 +158,13 @@ h3 {
 body.light-mode #contact-form input,
 body.light-mode #contact-form textarea {
     border: 1px solid rgba(0, 0, 0, 0.1);
-    background: white;
+    background: #555;
+    color: white;
+}
+
+body.light-mode #contact-form input::placeholder,
+body.light-mode #contact-form textarea::placeholder {
+    color: rgba(255, 255, 255, 0.7);
 }
 
 #contact-form textarea {
