@@ -1,5 +1,7 @@
 const generatorBtn = document.getElementById("generator-btn");
 const lottoNumbersContainer = document.querySelector(".lotto-numbers");
+const themeToggle = document.getElementById("theme-toggle");
+const body = document.body;
 
 generatorBtn.addEventListener("click", () => {
     lottoNumbersContainer.innerHTML = "";
@@ -15,4 +17,13 @@ generatorBtn.addEventListener("click", () => {
         numberDiv.textContent = number;
         lottoNumbersContainer.appendChild(numberDiv);
     });
+});
+
+themeToggle.addEventListener("click", () => {
+    body.classList.toggle("light-mode");
+    if (body.classList.contains("light-mode")) {
+        themeToggle.textContent = "Dark Mode";
+    } else {
+        themeToggle.textContent = "Light Mode";
+    }
 });
