@@ -1,7 +1,5 @@
 const recommendBtn = document.getElementById("recommend-btn");
 const resultContainer = document.getElementById("recommendation-result");
-const themeToggle = document.getElementById("theme-toggle");
-const body = document.body;
 
 const meals = [
     { name: "김치찌개", category: "한식" },
@@ -37,13 +35,4 @@ recommendBtn.addEventListener("click", () => {
         `;
         resultContainer.classList.remove("fade-out");
     }, 300);
-});
-
-themeToggle.addEventListener("click", () => {
-    body.classList.toggle("light-mode");
-    if (body.classList.contains("light-mode")) {
-        themeToggle.textContent = "다크 모드";
-    } else {
-        themeToggle.textContent = "라이트 모드";
-    }
 });

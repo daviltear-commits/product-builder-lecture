@@ -1,22 +1,9 @@
-
 :root {
     --bg-gradient: linear-gradient(to right, #6a11cb, #2575fc);
     --container-bg: rgba(255, 255, 255, 0.1);
     --text-color: white;
-    --number-bg: white;
-    --number-text: #333;
     --btn-bg: #ff4081;
     --btn-hover: #f50057;
-}
-
-body.light-mode {
-    --bg-gradient: linear-gradient(to right, #fdfbfb, #ebedee);
-    --container-bg: rgba(0, 0, 0, 0.05);
-    --text-color: #333;
-    --number-bg: #6a11cb;
-    --number-text: white;
-    --btn-bg: #6a11cb;
-    --btn-hover: #2575fc;
 }
 
 body {
@@ -29,7 +16,6 @@ body {
     min-height: 100vh;
     margin: 0;
     color: var(--text-color);
-    transition: background 0.3s ease, color 0.3s ease;
     padding: 40px 20px;
     box-sizing: border-box;
 }
@@ -44,19 +30,6 @@ body {
     position: relative;
     width: 100%;
     max-width: 600px;
-}
-
-.theme-toggle {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-    background: none;
-    border: 1px solid var(--text-color);
-    color: var(--text-color);
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-size: 0.8em;
 }
 
 h1 {
@@ -129,10 +102,6 @@ hr {
     margin: 20px 0;
 }
 
-body.light-mode hr {
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-}
-
 h3 {
     font-size: 1.5em;
     margin-bottom: 15px;
@@ -155,15 +124,8 @@ h3 {
     color: var(--text-color);
 }
 
-body.light-mode #contact-form input,
-body.light-mode #contact-form textarea {
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    background: #555;
-    color: white;
-}
-
-body.light-mode #contact-form input::placeholder,
-body.light-mode #contact-form textarea::placeholder {
+#contact-form input::placeholder,
+#contact-form textarea::placeholder {
     color: rgba(255, 255, 255, 0.7);
 }
 
@@ -185,4 +147,3 @@ body.light-mode #contact-form textarea::placeholder {
 #contact-form button:hover {
     background-color: var(--btn-hover);
 }
-
